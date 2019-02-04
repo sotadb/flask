@@ -13,4 +13,4 @@ RUN apk --update add --no-cache --virtual .build-deps $BUILDDEPS \
 	&& pip install --no-cache-dir $PYTHON_MODULES \
 	&& apk del .build-deps
 
-CMD ["uwsgi", "/var/www/app/uwsgi.ini"]
+CMD ["uwsgi", "/etc/uwsgi.ini"]
