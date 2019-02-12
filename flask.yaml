@@ -28,3 +28,27 @@ spec:
         image: sotadb/flask 
         ports: 
         - containerPort: 8080
+        volumeMounts:
+        - name: flask-cert
+          mountPath: "/etc/uwsgi/ssl"
+          readOnly: true
+      volumes:
+      - name: flask-cert
+        secret:
+          secretName: flask-auth
+          defaultMode: 0400
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: flask
+spec:
+  secretName: flask-auth
+  issuerRef:
+    name: ca-issuer
+    kind: ClusterIssuer
+  commonName: flask
+  organization:
+  - Flask host
+  dnsNames:
+  - flask
