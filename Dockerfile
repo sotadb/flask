@@ -10,7 +10,7 @@ RUN apk --update add --no-cache --virtual .build-deps $BUILDDEPS \
 	&& pip install --no-cache-dir $PYTHON_MODULES \
 	&& apk del .build-deps
 
-COPY www /var/
+COPY www /var/www
 COPY uwsgi.ini /etc/uwsgi/
 
 CMD ["uwsgi", "/etc/uwsgi/uwsgi.ini"]
