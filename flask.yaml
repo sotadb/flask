@@ -39,7 +39,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["install", "-c", "-o", "uwsgi", "-m", "0400", "/etc/uwsgi/ssl/ca.crt", "/etc/uwsgi/ssl/tls.crt", "/etc/uwsgi/ssl/tls.key", "/var/www/ssl"]
+              command: ["/usr/local/bin/movekeys.sh"]
       volumes:
       - name: flask-cert
         secret:
