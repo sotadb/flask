@@ -23,6 +23,10 @@ spec:
       labels:
         svc: flask
     spec:
+
+
+      securityContext:
+        fsGroup: 101
       containers:
       - name: flask
         image: sotadb/flask 
@@ -32,6 +36,10 @@ spec:
         - name: flask-cert
           mountPath: "/etc/uwsgi/ssl"
           readOnly: true
+        lifecycle:
+          postStart:
+            exec:
+              command: ["install", "-c", "-o", "uwsgi", "-m", "0400", "/etc/uwsgi/ssl/ca.crt", "/etc/uwsgi/ssl/tls.crt", "/etc/uwsgi/ssl/tld.key", "/var/www/ssl"]
       volumes:
       - name: flask-cert
         secret:
@@ -47,7 +55,7 @@ spec:
   issuerRef:
     name: ca-issuer
     kind: ClusterIssuer
-  commonName: flask
+  commonName: postgres
   organization:
   - Flask host
   dnsNames:

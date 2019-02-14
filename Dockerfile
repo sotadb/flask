@@ -8,7 +8,9 @@ ARG PYTHON_MODULES="Flask Flask-Misaka oauth2client PyGreSQL"
 RUN apk --update add --no-cache --virtual .build-deps $BUILDDEPS \
 	&& apk --update add --no-cache $FEATURES \
 	&& pip install --no-cache-dir $PYTHON_MODULES \
-	&& apk del .build-deps
+	&& apk del .build-deps \
+        && mkdir -p /var/www/ssl \
+        && chmod 0600 /var/www/ssl
 
 USER uwsgi
 COPY www /var/www
