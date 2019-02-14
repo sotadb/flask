@@ -12,7 +12,8 @@ RUN apk --update add --no-cache --virtual .build-deps $BUILDDEPS \
 	&& apk --update add --no-cache $FEATURES \
 	&& pip install --no-cache-dir $PYTHON_MODULES \
 	&& apk del .build-deps \
-        && chmod a+x /usr/local/bin/movekeys.sh 
+        && chmod a+x /usr/local/bin/movekeys.sh \
+        && install -d -o uwsgi -g uwsgi /var/www
 
 USER uwsgi
 COPY www /var/www
