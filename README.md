@@ -8,4 +8,4 @@ This is the flask enviroment used by SotADB.info. It is designed to be used behi
  * Flask-Misaka
  * oauth2client
  * PyGreSQL
-
+ * requests

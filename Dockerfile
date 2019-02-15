@@ -2,7 +2,7 @@ FROM alpine:3.5
 ENV LANG en_US.UTF-8
 ARG FEATURES="uwsgi-python libffi postgresql-libs ca-certificates"
 ARG BUILDDEPS="build-base postgresql-dev libffi-dev python-dev musl-dev py2-pip"
-ARG PYTHON_MODULES="Flask Flask-Misaka oauth2client PyGreSQL" 
+ARG PYTHON_MODULES="Flask Flask-Misaka oauth2client PyGreSQL requests" 
 
 COPY uwsgi.ini /etc/uwsgi/
 COPY movekeys.sh /usr/local/bin/
